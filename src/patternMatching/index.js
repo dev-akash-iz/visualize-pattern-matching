@@ -11,7 +11,7 @@ function clean(element) {
 }
 
 let currentFindMode = undefined;
-const defaultText = `akakashakashaKashAKashakAkash12AKaKash34akAKash56kaAkash78aKakAsh90akAkaShakAkashakA12kA34shAK56ash78akAK90ash12akA34kAsh56aK78ash90akA12kAsh34ak56ash78akA90kAsh12ak34ash56ak78Ash90akA12kAsh34ak56ash78aK90kAsh12ak34aKashash56ak78Ash90`;
+const defaultText = `akakashakashaKashAKashakAkash12AKaKash34akAKash56kaAkash78aKakAsh90akAkaShakAkashakA12k872384b892348hj2bjg283764A34shAK56ash78akAK90ash12akA34kAsh56aK78ash90akA12kAsh34ak56ash78akA90kAsh12ak34ash56ak7872384b892348hj2bjg2837648Ash90akA12kAsh34ak56ash78aK90kAsh12ak34aKashash56ak78A872384b892348hj2bjg283764sh90`;
 const defaultSplited = defaultText.split("");
 
 
@@ -26,7 +26,7 @@ const defaultSplited = defaultText.split("");
  * Built To Visualizing Pattern Matching in JavaScript with Algorithms .
  */
 export default function PatternVirtualization() {
-    const [query, setQuery] = useState("aKash");
+    const [query, setQuery] = useState("872384b892348hj2bjg283764");
     const [mode, setMode] = useState("sequential");
     const [text, setText] = useState(defaultText);
     const [buttonEvent, setButtonEvent] = useState({ editing: false, startedVisualizing: false });
@@ -211,6 +211,17 @@ export default function PatternVirtualization() {
             <p className="subtitle">
                 Watch how different pattern-matching algorithms search for text — step by step.
             </p>
+            <a
+                className="github-link"
+                href="https://github.com/dev-akash-iz/visualize-pattern-matching/tree/main/src/patternMatching"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                View UI Source code on GitHub
+            </a>
+
+
+
 
 
 
@@ -223,9 +234,8 @@ export default function PatternVirtualization() {
                     <h2>SCS Algorithm — Skipped Character Search</h2>
                     <div style={{ maxWidth: '100%', fontSize: 14, lineHeight: 1.5 }}>
                         <p style={{ paddingBottom: '10px' }}>
-                            <strong>SCS Algorithm a Custom Pattern Search by Akash</strong> — built from scratch to efficiently jump through text,
-                            skipping unnecessary checks while automatically handling overlapping matches.
-                            Designed specifically for this visualizer to efficiently highlight patterns.
+                            <strong>a Custom Pattern Search by Akash</strong> — built from scratch to efficiently jump through text,
+                            skipping unnecessary checks.
                         </p>
 
                         <p>
@@ -241,7 +251,7 @@ export default function PatternVirtualization() {
                             overflowX: "auto",
                             whiteSpace: "nowrap"
                         }}>
-                            Example: <code>aKash</code> → <code>aKashaKashaKashaKashaKashaKashaKashaKashaKashaKashaKashaKashaKashaKash</code>
+                            Example: <code>aKash</code> → <code>872384b892348hj2bjg283764</code>
                         </div>
                     </div>
                     <a
@@ -266,24 +276,6 @@ export default function PatternVirtualization() {
 
             {/* --- Controls --- */}
             <div className="controls">
-                <label>
-                    Search:
-                    <input
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                        placeholder="Type text to find..."
-                    />
-                </label>
-
-                <label>
-                    Algorithm Type:
-                    <select value={mode} onChange={(e) => setMode(e.target.value)}>
-                        <option value="sequential">Sequential</option>
-                        <option value="SCS">Skipped Character Search</option>
-                    </select>
-                </label>
-
-                <button disabled={buttonEvent.editing || buttonEvent.startedVisualizing} onClick={startVisual}>▶ Start Visualization</button>
                 {/* --- Legend Section --- */}
                 <div className="legend">
                     <div className="legend-item">
@@ -311,9 +303,52 @@ export default function PatternVirtualization() {
                 <h3>Paragraph:</h3>
                 {!buttonEvent.editing ? (
                     <>
-                        <button disabled={buttonEvent.startedVisualizing} onClick={() => {
-                            setButtonEvent((data) => ({ ...data, editing: true }));
-                        }}>✏️ Edit</button>
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '12px',
+                            flexWrap: 'wrap'
+                        }}>
+                            <button
+                                disabled={buttonEvent.startedVisualizing}
+                                onClick={() => setButtonEvent((data) => ({ ...data, editing: true }))}
+                                style={{ padding: '6px 10px', cursor: 'pointer' }}
+                            >
+                                ✏️ Edit
+                            </button>
+
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                <span>Search:</span>
+                                <input
+                                    value={query}
+                                    onChange={(e) => setQuery(e.target.value)}
+                                    placeholder="Type text to find..."
+                                    style={{ padding: '4px 8px', borderRadius: '4px', border: '1px solid #ccc' }}
+                                />
+                            </div>
+
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                <span>Algorithm Type:</span>
+                                <select
+                                    value={mode}
+                                    onChange={(e) => setMode(e.target.value)}
+                                    style={{ padding: '4px 8px', borderRadius: '4px', border: '1px solid #ccc' }}
+                                >
+                                    <option value="sequential">Sequential</option>
+                                    <option value="SCS">Skipped Character Search</option>
+                                </select>
+                            </div>
+
+                            <button
+                                disabled={buttonEvent.editing || buttonEvent.startedVisualizing}
+                                onClick={startVisual}
+                                style={{ padding: '6px 10px', cursor: 'pointer' }}
+                            >
+                                ▶ Start Visualization
+                            </button>
+                        </div>
+
+
                         <div className="paragraph">{memoized}</div>
                     </>
                 ) : (
